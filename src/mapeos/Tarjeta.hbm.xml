@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="datos.Tarjeta" table="tarjeta">
+		<id column="idTarjeta" name="idTarjeta">
+			<generator class="identity"/>
+		</id>
+		<property column="nroTarjeta" name="nroTarjeta" type="long"/>
+		<property column="saldo" name="saldo" type="float"/>
+		<property column="tarjetaActiva" name="tarjetaActiva" type="boolean"/>
+		<!--Relación con la tabla cliente-->
+		<many-to-one name="cliente" class="datos.Cliente" column="idCliente" not-null="true"/>
+		<!--Relación con la tabla viaje-->
+		<set name="viajes" table="viaje" order-by="idViaje asc" inverse="true" lazy="true" fetch="select">
+			<key column="idTarjeta" not-null="true"/>
+			<one-to-many class="datos.Viaje"/>
+		</set>
+		<!--Relación con la clase descuento (tarjeta_has_descuento)-->
+		<set table="tarjeta_has_descuento" name="descuentos" outer-join="true">
+			<key column="idTarjeta"/>
+			<many-to-many column="idDescuento" class="datos.Descuento"/>
+		</set>
+	</class>
+</hibernate-mapping>

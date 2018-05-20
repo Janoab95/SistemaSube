@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="datos.Descuento" table="descuento">
+		<id column="idDescuento" name="idDescuento">
+			<generator class="identity"/>
+		</id>
+		<property column="montoDesc" name="montoDesc" type="float"/>
+		<property column="nombreDesc" name="nombreDesc" type="string"/>
+		<!--Relación con la tabla cliente (cliente_has_descuento)-->
+		<set table="cliente_has_descuento" name="clientes" outer-join="true">
+			<key column="idDescuento"/>
+			<many-to-many column="idCliente" class="datos.Cliente"/>
+		</set>
+		<!--Relación con la tabla tarjeta (tarjeta_has_descuento)-->
+		<set table="tarjeta_has_descuento" name="tarjetas" outer-join="true">
+			<key column="idDescuento"/>
+			<many-to-many column="idTarjeta" class="datos.Tarjeta"/>
+		</set>
+	</class>
+</hibernate-mapping>
