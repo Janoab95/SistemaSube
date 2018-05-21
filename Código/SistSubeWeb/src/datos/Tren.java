@@ -6,8 +6,8 @@ public class Tren extends Transporte{
 	
 	public Tren() {}
 	
-	public Tren(String nombreTren, Tarifa tarifa) {
-		super(tarifa);
+	public Tren(String nombreTren) {
+		super();
 		this.nombreTren = nombreTren;
 	}
 	
@@ -44,4 +44,9 @@ public class Tren extends Transporte{
 		double total=0;
 		return total;
 	}
+	
+    public boolean cobrarBoleto(Tarjeta tajeta, int tramo, float monto) {
+		
+		return true;	
+    }
 }

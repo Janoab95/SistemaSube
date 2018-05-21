@@ -2,6 +2,7 @@ package negocio;
 
 import java.util.List;
 
+import datos.Descuento;
 import datos.Tarjeta;
 import datos.Viaje;
 import dao.TarjetaDao;
@@ -24,13 +25,19 @@ public class TarjetaABM {
 	
 	public int agregar(Tarjeta t) throws Exception{
 		if (t == null)throw new Exception("ERROR, la Tarjeta ingresada es nulo.");
+		
+		Tarjeta buscado=TarjetaDao.getIntance().traerTarjeta(t.getIdTarjeta());
+		if (buscado!=null)throw new Exception("ERROR, la tarjeta ingresada ya existe.");
+		
 		return TarjetaDao.getIntance().agregar(t);	
 	}
 	
 	public void actualizar(Tarjeta t) throws Exception {
-		Tarjeta buscado=TarjetaDao.getIntance().traerTarjeta(t.getIdTarjeta());
+		if (t==null)throw new Exception("ERROR, la tarjeta ingresada es nulo.");
 		
+		Tarjeta buscado=TarjetaDao.getIntance().traerTarjeta(t.getIdTarjeta());
 		if (buscado == null)throw new Exception("ERROR, la Tarjeta ingresada no existe.");
+		
 		TarjetaDao.getIntance().actualizar(t);
 	}
 	
@@ -72,6 +79,11 @@ public class TarjetaABM {
 	public boolean agregarViaje(Tarjeta t, Viaje v) throws Exception{
 		if (t == null || v == null)throw new Exception("ERROR, ingrese todos los datos.");
 		return t.agregarViaje(v);
-	}	
+	}
+	
+	public boolean agregarDescuento(Tarjeta t, Descuento d) throws Exception{
+		if (t == null || d == null)throw new Exception("ERROR, ingrese todos los datos.");
+		return t.agregarDescuento(d);
+	}
 	
 }

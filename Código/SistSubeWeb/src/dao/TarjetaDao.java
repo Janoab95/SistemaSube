@@ -126,5 +126,19 @@ public class TarjetaDao {
 				}
 				return objeto;
 		 } 
+		
+		public Tarjeta traerTarjetaYDescuentos(long idTarjeta)throws HibernateException{
+			Tarjeta objeto=null;
+			try{
+				iniciaOperacion();
+				String hql="from Tarjeta t where t.idTarjeta= "+ idTarjeta;
+				objeto = (Tarjeta) session.createQuery(hql).uniqueResult();
+				Hibernate.initialize(objeto.getDescuentos());
+			}finally{
+				session.close();
+			}
+			return objeto;
+	 } 
+		
 
 }

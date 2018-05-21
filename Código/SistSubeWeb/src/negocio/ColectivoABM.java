@@ -53,12 +53,5 @@ public class ColectivoABM {
 		if (Colectivos == null)throw new Exception("ERROR, no se han cargado Colectivos.");
 		return Colectivos;
 	}
-	
-	public Colectivo traerColectivoYTarifa(int idColectivo) throws Exception{
-		Colectivo buscado=ColectivoDao.getIntance().traerColectivoYTarifa(idColectivo);
-		
-		if (buscado == null)throw new Exception("ERROR, el ID ingresado no existe.");	
-		return buscado;
-	}
 
 }

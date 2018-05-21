@@ -1,6 +1,6 @@
 package datos;
 
-import datos.Tarifa;
+import dao.TarifaDao;
 
 public class Colectivo extends Transporte {
 	private int idColectivo;
@@ -10,8 +10,8 @@ public class Colectivo extends Transporte {
 	
 	public Colectivo() {}
 	
-	public Colectivo(int linea, int interno, int tramo, Tarifa tarifa) {
-		super(tarifa);
+	public Colectivo(int linea, int interno, int tramo) {
+		super();
 		this.linea = linea;
 		this.interno = interno;
 		this.tramo = tramo;
@@ -57,5 +57,20 @@ public class Colectivo extends Transporte {
 	public String toString() {
 		return "Colectivo id=" + idColectivo + ", linea=" + linea + ", interno=" + interno + ", tramo="
 				+ tramo + "";
+	}
+	
+	public boolean cobrarBoleto(Tarjeta tarjeta, long tramo) {
+		Tarifa t=TarifaDao.getIntance().traerTarifa(tramo);
+		float cobro=t.getMonto();
+		Viaje v=tarjeta.traerUltimoViaje();
+		
+		
+		
+		for (int i=0; i<=tarjeta.getDescuentos().size(); i++) {
+			cobro=cobro*tarjeta.getDescuentos().get(i).getMontoDesc()/100;
+		}
+		
+		tarjeta.debitarTarjeta(cobro);
+		return true;	
 	}
 }

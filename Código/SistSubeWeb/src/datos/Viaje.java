@@ -1,7 +1,6 @@
 package datos;
 
 import java.util.List;
-import java.util.ArrayList;
 import datos.Boleto;
 
 public class Viaje {
@@ -38,12 +37,13 @@ public class Viaje {
 		return "Viaje id=" + idViaje + ", boletos=" + boletos + "";
 	}
 	
-	public boolean agregarBoleto(Boleto boleto){
+	public boolean agregarBoleto(Boleto b){
+		this.boletos.add(b);
 		return true;
 	}
 	
 	public Boleto traerUltimoBoleto() {
-		Boleto b=new Boleto();
-		return b;
+		Boleto buscado=this.boletos.get( this.boletos.size() -1);
+		return buscado;
 	}
 }

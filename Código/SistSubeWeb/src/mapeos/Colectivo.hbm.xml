@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="datos.Colectivo" table="colectivo">
+		<id name="idColectivo" column="idColectivo">
+			<generator class="foreign">
+				<param name="property">transporte</param>
+			</generator>
+		</id>
+		
+		<property column="interno" name="interno" type="int"/>
+		<property column="linea" name="linea" type="int"/>
+		<property column="tramo" name="tramo" type="int"/>
+		
+		<one-to-one name="Transporte" class="datos.Transporte"></one-to-one>
+		
+	</class>
+</hibernate-mapping>

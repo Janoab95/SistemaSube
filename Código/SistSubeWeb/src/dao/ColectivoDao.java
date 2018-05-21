@@ -114,17 +114,4 @@ public class ColectivoDao {
 		return lista;
 	}
 	 
-	 public Colectivo traerColectivoYTarifa(int idColectivo)throws HibernateException{
-		 Colectivo objeto=null;
-			try{
-				iniciaOperacion();
-				String hql="from Colectivo c where c.idColectivo= "+ idColectivo;
-				objeto = (Colectivo) session.createQuery(hql).uniqueResult();
-				Hibernate.initialize(objeto.getTarifa());
-			}finally{
-				session.close();
-			}
-			return objeto;
-		}
-
 }

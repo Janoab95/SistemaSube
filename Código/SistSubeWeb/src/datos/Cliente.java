@@ -1,7 +1,6 @@
 package datos;
 
 import java.util.List;
-import java.util.ArrayList;
 import datos.Tarjeta;
 import datos.Descuento;
 
@@ -77,33 +76,66 @@ public class Cliente {
 	/*------------------METODOS----------------*/
 	
 	public boolean agregarTarjeta(Tarjeta t) {
+		this.tarjetas.add(t);
 		return true;
 	}
 	
 	public boolean activarTarjeta(long nroTarjeta) {
+        Tarjeta buscado=this.traerTarjeta(nroTarjeta);
+		
+		buscado.setTarjetaActiva(true);
 		return true;
 	}
 	
 	public boolean darBajaTarjeta(long nroTarjeta) {
+		Tarjeta buscado=this.traerTarjeta(nroTarjeta);
+		
+		buscado.setTarjetaActiva(false);
 		return true;
 	}
 	
 	public Tarjeta traerTarjeta(long nroTarjeta) {
-		Tarjeta t=new Tarjeta();
-		return t;
+		boolean encontrado=false;
+		int i=0;
+		Tarjeta buscado=null;
+		
+		while(encontrado&&i<this.tarjetas.size()) {
+			
+			if(this.tarjetas.get(i).getNroTarjeta() == nroTarjeta) {
+			     buscado=this.tarjetas.get(i);
+			     encontrado=true;
+			}
+		 i++;
+		}
+		
+		return buscado;
 	}
 	
 	public boolean agregarDescuento(Descuento d) {
+		this.descuentos.add(d);
 		return true;
 	}
 	
 	public boolean eliminarDescuento(Descuento d) {
+		this.descuentos.remove(d);
 		return true;
 	}
 	
-	public Descuento traerDescuento(int idDEscuento) {
-		Descuento d=new Descuento();
-		return d;
+	public Descuento traerDescuento(int idDescuento) {
+		boolean encontrado=false;
+		int i=0;
+		Descuento buscado=null;
+		
+		while(encontrado&&i<this.descuentos.size()) {
+			
+			if(this.tarjetas.get(i).getNroTarjeta() == idDescuento) {
+			     buscado=this.descuentos.get(i);
+			     encontrado=true;
+			}
+		 i++;
+		}
+		
+		return buscado;
 	}
 	
 	@Override

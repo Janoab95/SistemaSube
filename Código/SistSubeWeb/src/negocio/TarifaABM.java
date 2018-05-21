@@ -47,10 +47,10 @@ public class TarifaABM {
 		return buscado;
 	}
 	
-	public Tarifa traerTarifa(int tramo, float monto) throws Exception{
-		Tarifa buscado=TarifaDao.getIntance().traerTarifa(tramo, monto);
+	public Tarifa traerTarifa(long tramo) throws Exception{
+		Tarifa buscado=TarifaDao.getIntance().traerTarifa(tramo);
 		
-		if (buscado == null)throw new Exception("ERROR, las combinacion ingresada no existe.");
+		if (buscado == null)throw new Exception("ERROR, el tramo ingresado no existe.");
 		return buscado;
 	}
 	

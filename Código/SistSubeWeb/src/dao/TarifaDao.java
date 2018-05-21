@@ -90,12 +90,12 @@ public class TarifaDao {
 		return objeto;
 	}
 	
-	public Tarifa traerTarifa(int tramo, float monto)throws HibernateException{
+	public Tarifa traerTarifa(long tramo)throws HibernateException{
 		Tarifa objeto = null;
 		
 		try{
 			iniciaOperacion();
-			objeto = (Tarifa) session.createQuery("from Tarifa t where t.tramo="+tramo+"and t.monto="+monto).uniqueResult();
+			objeto = (Tarifa) session.createQuery("from Tarifa t where t.tramo="+tramo+"").uniqueResult();
 		}finally{
 			session.close();
 		}

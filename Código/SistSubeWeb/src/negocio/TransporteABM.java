@@ -55,8 +55,8 @@ public class TransporteABM {
 		return transportes;
 	}
 	
-	public boolean cobrarBoleto(Transporte tr, Tarjeta t, float monto) throws Exception{
-		if (t == null || tr == null|| monto==0)throw new Exception("ERROR, ingrese todos los datos.");
-		return tr.cobrarBoleto(t, monto);
+	public boolean cobrarBoleto(Transporte tr, Tarjeta t, long tramo) throws Exception{
+		if (t == null || tr == null|| tramo==0)throw new Exception("ERROR, ingrese todos los datos.");
+		return tr.cobrarBoleto(t, tramo);
 	}
 }

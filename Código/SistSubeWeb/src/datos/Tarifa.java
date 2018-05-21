@@ -2,12 +2,12 @@ package datos;
 
 public class Tarifa {
 	private int idTarifa;
-	private int tramo;
+	private long tramo;
 	private float monto;
 
 	public Tarifa() {}
 	
-	public Tarifa(int tramo, float monto) {
+	public Tarifa(long tramo, float monto) {
 		super();
 		this.tramo = tramo;
 		this.monto = monto;
@@ -23,11 +23,11 @@ public class Tarifa {
 		this.idTarifa = idTarifa;
 	}
 
-	public int getTramo() {
+	public long getTramo() {
 		return tramo;
 	}
 
-	public void setTramo(int tramo) {
+	public void setTramo(long tramo) {
 		this.tramo = tramo;
 	}
 

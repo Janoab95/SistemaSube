@@ -1,5 +1,5 @@
 package datos;
-import java.util.ArrayList;
+
 import java.util.List;
 import datos.Viaje;
 
@@ -9,6 +9,7 @@ public class Tarjeta {
 	private float saldo;
 	private boolean tarjetaActiva;
 	private List<Viaje> viajes;
+	private List<Descuento> descuentos;
 	
 	public Tarjeta() {}
 	
@@ -18,6 +19,7 @@ public class Tarjeta {
 		this.saldo = saldo;
 		this.tarjetaActiva = false;
 		this.viajes = null;
+		this.descuentos = null;
 	}
     /*----------------gets an sets-------------*/
 	
@@ -61,6 +63,14 @@ public class Tarjeta {
 		this.viajes = viajes;
 	}
 	
+	public List<Descuento> getDescuentos() {
+		return descuentos;
+	}
+
+	public void setDescuentos(List<Descuento> descuentos) {
+		this.descuentos = descuentos;
+	}
+	
 	/*--------------------METODOS---------------------*/
 	
 	@Override
@@ -69,13 +79,28 @@ public class Tarjeta {
 				+ ", tarjetaActiva=" + tarjetaActiva + "";
 	}
 	
-	public boolean agregarViaje(Viaje viaje){
+	public boolean agregarViaje(Viaje v){
+		this.viajes.add(v);
 		return true;
 	}
 
 	public Viaje traerUltimoViaje() {
-		Viaje v=new Viaje();
-		return v;
+        Viaje buscado=this.viajes.get( this.viajes.size() -1);
+		return buscado;
 	}
-
+	
+	public boolean agregarDescuento(Descuento d){
+		this.descuentos.add(d);
+		return true;
+	}
+	
+	public boolean debitarTarjeta(float monto) {
+		this.saldo-=monto;
+		return true;
+	}
+	
+	public boolean acreditarTarjeta(float monto) {
+		this.saldo+=monto;
+		return true;
+	}
 }

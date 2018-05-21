@@ -1,15 +1,13 @@
 package datos;
 
-import datos.Tarifa;
-
 public class Subte extends Transporte {
 	private int idSubte;
 	private char linea;
 	
 	public Subte() {}
 
-	public Subte(char linea, Tarifa tarifa) {
-		super(tarifa);
+	public Subte(char linea) {
+		super();
 		this.linea = linea;
 	}
 	
@@ -36,5 +34,10 @@ public class Subte extends Transporte {
 	@Override
 	public String toString() {
 		return "Subte id=" + idSubte + ", linea=" + linea + "";
+	}
+	
+    public boolean cobrarBoleto(Tarjeta tajeta, int tramo) {
+		
+		return true;
 	}
 }
