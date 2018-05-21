@@ -47,7 +47,7 @@ public class RedSubeABM {
 		return buscado;
 	}
 	
-	public RedSube traerRedSube(double porcentajeDescuento) throws Exception{
+	public RedSube traerRedSube(float porcentajeDescuento) throws Exception{
 		RedSube buscado=RedSubeDao.getIntance().traerRedSube(porcentajeDescuento);
 		
 		if (buscado == null)throw new Exception("ERROR, el porcentaje ingresado no existe.");

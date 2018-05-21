@@ -2,11 +2,11 @@ package datos;
 
 public class RedSube {
 	private int idRedSube;
-	private double porcentajeDescuento;
+	private float porcentajeDescuento;
 	
 	public RedSube() {}
 	
-	public RedSube(double porcentajeDescuento) {
+	public RedSube(float porcentajeDescuento) {
 		super();
 		this.porcentajeDescuento = porcentajeDescuento;
 	}
@@ -21,11 +21,11 @@ public class RedSube {
 		this.idRedSube = idRedSube;
 	}
 
-	public double getPorsentajeDescuento() {
+	public float getPorcentajeDescuento() {
 		return porcentajeDescuento;
 	}
 
-	public void setPorsentajeDescuento(double porcentajeDescuento) {
+	public void setPorcentajeDescuento(float porcentajeDescuento) {
 		this.porcentajeDescuento = porcentajeDescuento;
 	}
 	

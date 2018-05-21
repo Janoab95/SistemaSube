@@ -90,7 +90,7 @@ public class RedSubeDao {
 		return objeto;
 	}
 	
-	public RedSube traerRedSube(double porcentajeDescuento)throws HibernateException{
+	public RedSube traerRedSube(float porcentajeDescuento)throws HibernateException{
 		RedSube objeto = null;
 		
 		try{

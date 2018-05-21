@@ -1,5 +1,8 @@
 package datos;
 
+import java.util.GregorianCalendar;
+
+import dao.RedSubeDao;
 import dao.TarifaDao;
 
 public class Colectivo extends Transporte {
@@ -60,17 +63,54 @@ public class Colectivo extends Transporte {
 	}
 	
 	public boolean cobrarBoleto(Tarjeta tarjeta, long tramo) {
+		boolean habilitado=this.verificarViaje(tarjeta);
+		Viaje ultimoViaje=tarjeta.traerUltimoViaje();
 		Tarifa t=TarifaDao.getIntance().traerTarifa(tramo);
 		float cobro=t.getMonto();
-		Viaje v=tarjeta.traerUltimoViaje();
+		int cantBoletos= 0;
+		float descuento=0;
 		
+		//////////////////////////////verificacion ultimo viaje///////////////////////////////
+		if (habilitado==true) {
+			Boleto b=ultimoViaje.traerUltimoBoleto();
+			
+			if ( b.getTransporte().getClass() == this.getClass()) {
+				Colectivo c= (Colectivo) b.getTransporte();
+				
+				if (c.linea == this.linea) {
+					Viaje nuevoViaje=new Viaje();
+					tarjeta.agregarViaje(nuevoViaje);
+				}
+				
+			}
+		}
+		///////////////////////////////calcula RedSube/////////////////////////////////////////
+		cantBoletos = ultimoViaje.getBoletos().size() -1;
 		
-		
-		for (int i=0; i<=tarjeta.getDescuentos().size(); i++) {
-			cobro=cobro*tarjeta.getDescuentos().get(i).getMontoDesc()/100;
+		if (cantBoletos==2) {
+			RedSube r=RedSubeDao.getIntance().traerRedSube(50);
+			descuento=cobro*( r.getPorcentajeDescuento()/100 );
+	        cobro-=descuento;
 		}
 		
+		if (cantBoletos>=3) {
+			RedSube r=RedSubeDao.getIntance().traerRedSube(75);
+			descuento=cobro*( r.getPorcentajeDescuento()/100 );
+	        cobro-=descuento;
+		}
+		//////////////////////////////aplica descuentos////////////////////////////////////////
+		
+		for (int i=0; i<=tarjeta.getDescuentos().size(); i++) {
+			descuento=cobro*( tarjeta.getDescuentos().get(i).getMontoDesc()/100 );
+			cobro-=descuento;
+		}
+        //////////////////////////////crea el boleto nuevo/////////////////////////////////////
+        GregorianCalendar horaActual=new GregorianCalendar();
+        Boleto boletoActual=new Boleto(horaActual, cobro, this);
+        
+        tarjeta.traerUltimoViaje().agregarBoleto(boletoActual);
 		tarjeta.debitarTarjeta(cobro);
 		return true;	
 	}
+	
 }
