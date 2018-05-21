@@ -6,17 +6,21 @@
 		<id column="idDescuento" name="idDescuento">
 			<generator class="identity"/>
 		</id>
+		
 		<property column="montoDesc" name="montoDesc" type="float"/>
 		<property column="nombreDesc" name="nombreDesc" type="string"/>
+		
 		<!--Relación con la tabla cliente (cliente_has_descuento)-->
-		<set table="cliente_has_descuento" name="clientes" outer-join="true">
+		<set table="descuento_has_cliente" name="clientes" outer-join="true">
 			<key column="idDescuento"/>
 			<many-to-many column="idCliente" class="datos.Cliente"/>
 		</set>
+		
 		<!--Relación con la tabla tarjeta (tarjeta_has_descuento)-->
 		<set table="tarjeta_has_descuento" name="tarjetas" outer-join="true">
 			<key column="idDescuento"/>
 			<many-to-many column="idTarjeta" class="datos.Tarjeta"/>
 		</set>
+		
 	</class>
 </hibernate-mapping>

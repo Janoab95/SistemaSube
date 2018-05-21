@@ -9,8 +9,8 @@
 			</generator>
 		</id>
 		
-		<property column="interno" name="interno" type="int"/>
 		<property column="linea" name="linea" type="int"/>
+		<property column="interno" name="interno" type="int"/>
 		<property column="tramo" name="tramo" type="int"/>
 		
 		<one-to-one name="Transporte" class="datos.Transporte"></one-to-one>

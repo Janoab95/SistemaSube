@@ -6,18 +6,22 @@
 		<id column="idCliente" name="idCliente">
 			<generator class="identity"/>
 		</id>
+		
 		<property column="apellido" name="apellido" type="string"/>
 		<property column="nombre" name="nombre" type="string"/>
 		<property column="dni" name="dni" type="int"/>
+		
 		<!--Relación con la tabla descuento (cliente_has_descuento)-->
-		<set table="cliente_has_descuento" name="descuentos" outer-join="true">
+		<set table="descuento_has_cliente" name="descuentos" outer-join="true">
 			<key column="idCliente"/>
 			<many-to-many column="idDescuento" class="datos.Descuento"/>
 		</set>
+		
 		<!--Relación con la tabla tarjeta-->
 		<set name="tarjetas" table="tarjeta" order-by="idTarjeta asc" inverse="true" lazy="true" fetch="select">
 			<key column="idCliente" not-null="true"/>
 			<one-to-many class="datos.Tarjeta"/>
 		</set>
+		
 	</class>
 </hibernate-mapping>
